@@ -21,7 +21,7 @@ describe('Ship', () => {
         expect(ship1.getRemainingLife()).toBe(3)
     });
 
-    it('Should be S',()=>{
+    it('Should be Sunk',()=>{
 
         ship1.hit()
         ship1.hit()
