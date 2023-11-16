@@ -1,31 +1,81 @@
-function Cell(){
-
-}
+import Ship from '../Ship/Ship';
 
 
  function Gameboard(){
-    const size = 10;
 
-    const board = []
+            const size = 10;
 
-    for(let row = 0;  row < size; row+=1){
-        board.push([])
+            const board = []
 
-        for (let column = 0; column < size; column++) {
+
+
+            const init = () => {
             
-            const cell = Cell()
+                for(let row = 0;  row < size; row+=1){
+                    board.push([])
+        
+                    for (let column = 0; column < size; column+=1) {
+                        board[row].push({isOccupied: false})
+                    }
+                }
+            }
 
-            board[row].push(cell)
-        }
-    }
+            init()
 
 
-    const getBoard = () =>  board
+            const getBoard = () =>  board
 
 
-    return {
-        getBoard
-    }
+
+            const checkValidSpace = (coordinates) =>{
+
+                const [x, y] = coordinates
+
+                const xValid = (x >= 0 && x <= size )
+
+                const yValid = (y >= 0 && y <= size )
+            
+
+
+                return (xValid && yValid)
+            }
+
+
+
+
+            const placeShip  = (ship,coordinates,direction ) => {
+                
+                let [x,y] = coordinates
+
+                if(direction === 'vertical'){
+                    
+
+                    for(let shipPart = 0; shipPart < ship.remainingLife(); shipPart++){
+                        
+
+
+                    }
+
+                }
+                
+                
+                if(direction === 'horizontal'){
+
+                }
+                    
+            }
+
+            const recieveAttack = (coordinates) => {
+
+
+
+            }
+
+
+            return {
+                getBoard,
+                placeShip
+            }
 }
 
 export default Gameboard
