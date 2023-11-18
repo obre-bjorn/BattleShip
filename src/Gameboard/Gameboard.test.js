@@ -4,8 +4,7 @@ import Ship from '../Ship/Ship';
 
 
 describe('GameBoard', () => {
-
-
+    
     let board;
 
     beforeEach(()=>{
@@ -30,8 +29,8 @@ describe('GameBoard', () => {
 
         const ship = Ship(3)
 
-        const result = board.placeShip([0,2],ship, 'vertical')
-
+        const result = board.placeShip(ship,[0,2], 'vertical')
+        
         expect(result).toBe(true)
         
     })
@@ -44,9 +43,10 @@ describe('GameBoard', () => {
         const ship2 = Ship(3)
 
 
+        // eslint-disable-next-line no-unused-vars
         const resultShip1 = board.placeShip(ship1, [0,0], 'vertical')
         const resultShip2 = board.placeShip(ship2, [1,0], 'horizontal')
-
+        console.log(board.getBoard())
         expect(resultShip2).toBe(false)
     })
 
@@ -55,19 +55,20 @@ describe('GameBoard', () => {
     // & Provide tests for the state of board when ship is placed vertically and horizontally 
     it('Should occupy spaces horizontally on the board', () => {
         const ship = new Ship(3);
-        board.placeShip(ship, 2, 4, 'horizontal');
+        board.placeShip(ship, [2,4], 'horizontal');
 
         // Check the board state to ensure the spaces are occupied
         const boardState = board.getBoard();
-        expect(boardState[4][2].isOccupied).toBe(true);
-        expect(boardState[4][3].isOccupied).toBe(true);
-        expect(boardState[4][4].isOccupied).toBe(true);
+        expect(boardState[2][4].isOccupied).toBe(true);
+        expect(boardState[2][5].isOccupied).toBe(true);
+        expect(boardState[2][6].isOccupied).toBe(true);
     // Additional assertions based on your game logic
      });
 
+
     it('Should occupy spaces vertically on the board', () => {
         const ship = new Ship(4);
-        board.placeShip(ship, 0, 1, 'vertical');
+        board.placeShip(ship, [0, 1], 'vertical');
 
         // Check the board state to ensure the spaces are occupied
         const boardState = board.getBoard();
@@ -82,7 +83,7 @@ describe('GameBoard', () => {
      
     it('Should occupy spaces horizontally on the board', () => {
         const ship = new Ship(4);
-        board.placeShip(ship, 0, 1, 'horizontal');
+        board.placeShip(ship, [0, 1], 'horizontal');
 
         // Check the board state to ensure the spaces are occupied
         const boardState = board.getBoard();
@@ -93,10 +94,39 @@ describe('GameBoard', () => {
         // Additional assertions based on your game logic
      });
 
+     it('Should return true when receiving an attack on a cell that has not been attacked before', ()=>{
+
+        const hasAttacked =  board.recieveAttack([2,2])
+        expect(hasAttacked).toBe(true)
+
+     })
+     
+     it('Should recieve attacks when the coordinates given has not recieved any attack', ()=>{
+
+        // eslint-disable-next-line no-unused-vars
+        const hasAttacked =  board.recieveAttack([2,2])
+        const hasAttackedAgain = board.recieveAttack([2,2])
+
+        expect(hasAttackedAgain).toBe(false)
+        
+     })
 
 
+    it('Should recieve attack and hit Ship if available', ()=>{
+        
+        const submarine = Ship(4)
 
+        // eslint-disable-next-line no-unused-vars
+        const isShipPlaced = board.placeShip(submarine, [2,2], 'horizontal')
 
+        // eslint-disable-next-line no-unused-vars
+        const hasAttacked =  board.recieveAttack([2,2])
+        
+        const submarineLife = submarine.getRemainingLife() 
+
+        expect(submarineLife).toBe(3)
+        
+     })
 
     
 
