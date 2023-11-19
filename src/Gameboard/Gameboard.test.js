@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import Gameboard from './Gameboard';
 import Ship from '../Ship/Ship';
@@ -46,7 +47,6 @@ describe('GameBoard', () => {
         // eslint-disable-next-line no-unused-vars
         const resultShip1 = board.placeShip(ship1, [0,0], 'vertical')
         const resultShip2 = board.placeShip(ship2, [1,0], 'horizontal')
-        console.log(board.getBoard())
         expect(resultShip2).toBe(false)
     })
 
@@ -116,18 +116,36 @@ describe('GameBoard', () => {
         
         const submarine = Ship(4)
 
-        // eslint-disable-next-line no-unused-vars
-        const isShipPlaced = board.placeShip(submarine, [2,2], 'horizontal')
-
-        // eslint-disable-next-line no-unused-vars
-        const hasAttacked =  board.recieveAttack([2,2])
+        board.placeShip(submarine, [2,2], 'horizontal')
+        board.recieveAttack([2,2])
+        board.recieveAttack([2,3])        
+        board.recieveAttack([2,3])
         
         const submarineLife = submarine.getRemainingLife() 
 
-        expect(submarineLife).toBe(3)
+        expect(submarineLife).toBe(2)
         
      })
 
-    
+
+     it('Should return true if all placed ships are sunk after receiving attacks', () =>{
+        const submarine = Ship(3)
+        const destroyer = Ship(2)
+
+        board.placeShip(submarine,[0,0], 'vertical') 
+        board.placeShip(destroyer, [0,1],'horizontal')
+
+        // Hit the ships 
+        board.recieveAttack([0,0])
+        board.recieveAttack([1,0])
+        board.recieveAttack([2,0])
+
+        board.recieveAttack([0,1])
+        board.recieveAttack([0,2])
+
+        expect(board.allShipsSunk()).toBe(true)
+
+     })
+  
 
 });

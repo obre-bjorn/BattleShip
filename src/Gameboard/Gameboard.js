@@ -2,6 +2,8 @@
 
             const size = 10;
 
+            const ships = []
+
             const board = []
 
             const init = () => {
@@ -66,8 +68,6 @@
                     endY += ship.getLength() - 1
                 }
 
-
-
                     // Check overlapping ship
                     for(let shipPartY = y; shipPartY <= endY; shipPartY +=1 ){
 
@@ -78,15 +78,10 @@
                             const validSpace = checkValidSpace(newCoordinates) 
 
                             if (!validSpace || occupied)  {
-                                return false
-                            
+                                return false                            
                             }                                   
-
-                                
                         }
-                        
                     }
-                    
                     
                     // ^ Add ship to respective indexes
                     for(let shipPartY = y; shipPartY <= endY; shipPartY +=1 ){
@@ -99,6 +94,7 @@
                         }
 
                     }
+                    ships.push(ship)
 
                 return true
                     
@@ -110,7 +106,7 @@
                 
                 const checkShip = board[y][x].ship
                 // Check if already attacked
-                
+
                 if(board[y][x].recievedAttack){
                     return false
                 }
@@ -119,15 +115,21 @@
                 board[y][x].recievedAttack = true
                 if(checkShip){
                     checkShip.hit()
+                    console.log('Ship Hitted')
+                }else{
+                    console.log('You missed')
                 }
                 return true
             }
+
+            const allShipsSunk = () => ships.every( (ship) => ship.isSunk())
 
 
             return {
                 getBoard,
                 placeShip,
                 recieveAttack,
+                allShipsSunk
             }
 }
 

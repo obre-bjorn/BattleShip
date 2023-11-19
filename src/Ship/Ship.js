@@ -7,7 +7,6 @@ function Ship (length){
         life-=1
     }
 
-    const getShipName = () => name
 
     const getLength = () => length
     
@@ -15,6 +14,8 @@ function Ship (length){
     const getRemainingLife = () => life
 
     const isSunk = () => life === 0
+
+    
     
     return {
         getLength,
