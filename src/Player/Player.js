@@ -1,23 +1,24 @@
 import Gameboard from '../Gameboard/Gameboard';
 
-function Player(name){
 
-    const
+function randomCoordinates(){
+
+    const x = Math.floor(Math.random() * 11);
+    const y = Math.floor(Math.random() * 11);
+
+    return [x,y]
+}
+
+function createPlayer(name){
+
 
     const playerGameboard = Gameboard()
 
-    const playerIsActive = false
 
-    const play = (coordinates,board) => {
+    const play = (coordinates,opponentBoard) => {
 
-
-
-        if( playerIsActive){
-            board.recieveAttack(coordinates)
-            return true
-        }
-
-            return false
+        opponentBoard.recieveAttack(coordinates)
+        
         
     }
 
@@ -28,3 +29,28 @@ function Player(name){
     }
 
 }
+
+
+function createComputerPlayer(){
+    
+    const player = createPlayer ();
+
+    player.play = (opponentBoard) => {
+        
+        let played = false
+     
+             while (!played){
+                 const coordinates = randomCoordinates()
+                 played = opponentBoard.recieveAttack(coordinates)
+             }
+    }
+
+
+
+    return {
+        player
+
+    }
+
+}
+export { createComputerPlayer, createPlayer}
