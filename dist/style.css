@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'VerminVibes';
+    src: url('./assets/Fonts/VerminVibesV-Zlg3.ttf');
+}
+
+*,::after,::before{
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+body{
+    background-image: url(./assets/images/battleship.jpg);
+    backdrop-filter: ;
+    font-size: 18px;
+    font-family: 'VerminVibes';
+    color: orangered;
+}
+body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)); /* Customize the gradient as needed */
+        }
+
+
+#game-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.player{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100%; */
+
+}
+
+.board{
+    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); 
+    gap: 5px; 
+    /* place-items: center; */
+    
+}
+
+.cell{
+    background-color: #006994;
+    /* border: 1px solid #fff; Add a border to separate cells */
+    height: 50px; /* Adjust the height of each cell */
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px; /* Adjust the font size if needed */
+    font-weight: bold; /* Optionally, make the text bold */
+    color: #fff; /* Set the text color */
+    
+
+}
+.cell:hover{
+    background-color: white;
+}
+
+.cell.missed{
+    background-color: red;
+}
+.cell.hit{
+    background-color: gray;
+}

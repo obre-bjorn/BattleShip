@@ -96,7 +96,7 @@ describe('GameBoard', () => {
 
      it('Should return true when receiving an attack on a cell that has not been attacked before', ()=>{
 
-        const hasAttacked =  board.recieveAttack([2,2])
+        const hasAttacked =  board.receiveAttack([2,2])
         expect(hasAttacked).toBe(true)
 
      })
@@ -104,8 +104,8 @@ describe('GameBoard', () => {
      it('Should recieve attacks when the coordinates given has not recieved any attack', ()=>{
 
         // eslint-disable-next-line no-unused-vars
-        const hasAttacked =  board.recieveAttack([2,2])
-        const hasAttackedAgain = board.recieveAttack([2,2])
+        const hasAttacked =  board.receiveAttack([2,2])
+        const hasAttackedAgain = board.receiveAttack([2,2])
 
         expect(hasAttackedAgain).toBe(false)
         
@@ -117,9 +117,9 @@ describe('GameBoard', () => {
         const submarine = Ship(4)
 
         board.placeShip(submarine, [2,2], 'horizontal')
-        board.recieveAttack([2,2])
-        board.recieveAttack([2,3])        
-        board.recieveAttack([2,3])
+        board.receiveAttack([2,2])
+        board.receiveAttack([2,3])        
+        board.receiveAttack([2,3])
         
         const submarineLife = submarine.getRemainingLife() 
 
@@ -136,12 +136,12 @@ describe('GameBoard', () => {
         board.placeShip(destroyer, [0,1],'horizontal')
 
         // Hit the ships 
-        board.recieveAttack([0,0])
-        board.recieveAttack([1,0])
-        board.recieveAttack([2,0])
+        board.receiveAttack([0,0])
+        board.receiveAttack([1,0])
+        board.receiveAttack([2,0])
 
-        board.recieveAttack([0,1])
-        board.recieveAttack([0,2])
+        board.receiveAttack([0,1])
+        board.receiveAttack([0,2])
 
         expect(board.allShipsSunk()).toBe(true)
 

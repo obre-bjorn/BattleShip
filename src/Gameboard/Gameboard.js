@@ -63,9 +63,13 @@
                 
                 // Set ship ending coorinate
                 if( direction === 'horizontal'){
+
                     endX += ship.getLength() - 1
+
                 }else if(direction === 'vertical'){
+
                     endY += ship.getLength() - 1
+
                 }
 
                     // Check overlapping ship
@@ -100,7 +104,7 @@
                     
             }
 
-            const recieveAttack = (coordinates) => {
+            const receiveAttack = (coordinates) => {
 
                 const[y,x] = coordinates
                 
@@ -115,7 +119,7 @@
                 board[y][x].recievedAttack = true
                 if(checkShip){
                     checkShip.hit()
-                    console.log('Ship Hitted')
+                    console.log('Ship hit')
                 }else{
                     console.log('You missed')
                 }
@@ -128,7 +132,7 @@
             return {
                 getBoard,
                 placeShip,
-                recieveAttack,
+                receiveAttack,
                 allShipsSunk
             }
 }
