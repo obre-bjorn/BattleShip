@@ -17,12 +17,8 @@ function createPlayer(name){
     const turn = true
 
 
-    const play = (coordinates,opponentBoard) => {
-
-        opponentBoard.receiveAttack(coordinates)
-        
-        
-    }
+    const play = (coordinates,opponentBoard) =>  opponentBoard.receiveAttack(coordinates)
+    
 
 
     return {
@@ -41,13 +37,17 @@ function createComputerPlayer(){
 
     player.play = (opponentBoard) => {
         
-        let played = false
+        let played = {attacked:false, message:null}
+        let coords = randomCoordinates()
      
-             while (!played){
-                 const coordinates = randomCoordinates()
-                 console.log(coordinates)
-                 played = opponentBoard.receiveAttack(coordinates)
+             while (!played.attacked){
+                coords = randomCoordinates()
+                 console.log(coords)
+                 
+                 played = opponentBoard.receiveAttack(coords)
              }
+
+             return {coords,played}
     }
 
 

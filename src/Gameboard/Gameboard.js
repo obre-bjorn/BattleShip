@@ -105,25 +105,26 @@
             }
 
             const receiveAttack = (coordinates) => {
-
+                let message = ''
                 const[y,x] = coordinates
                 
                 const checkShip = board[y][x].ship
                 // Check if already attacked
 
                 if(board[y][x].recievedAttack){
-                    return false
+                    return {attacked:false, message: 'invalid'}
                 }
                 
                 
                 board[y][x].recievedAttack = true
                 if(checkShip){
                     checkShip.hit()
-                    console.log('Ship hit')
+                    message = 'hit'
                 }else{
-                    console.log('You missed')
+                    message = 'missed'
                 }
-                return true
+                return {attacked:true,message}
+
             }
 
             const allShipsSunk = () => ships.every( (ship) => ship.isSunk())
