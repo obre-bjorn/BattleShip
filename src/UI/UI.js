@@ -10,7 +10,6 @@ function createUI(){
 
     const updateUI = (player,coordinates,message) =>{
 
-
         const playerBoardContainer = document.getElementById(player)
         const[y,x] = coordinates
         const cellAttacked = playerBoardContainer.querySelector(`[data-row="${y}"][data-col="${x}"]`)
@@ -20,6 +19,7 @@ function createUI(){
             cellAttacked.classList.add('missed')
         }
         console.log(cellAttacked)
+    
     }
     
 
@@ -28,24 +28,26 @@ function createUI(){
         const clickedCol = parseInt(cell.dataset.col, 10);
     
         const currentPlayer = players.find((player) => player.turn )
-    
-        if(currentPlayer !== players[0] ){
+        
+        const validBoard = cell.parentNode.parentNode.getAttribute('id') === 'player-two'
+
+        if(currentPlayer !== players[0] || !validBoard ){
             return
         }
     
         const playerAttack =  players[0].play([clickedRow,clickedCol],players[1].playerGameboard)
 
 
+
         if (playerAttack.attacked){
+
             updateUI('player-two',[clickedRow,clickedCol], playerAttack.message)
-            
             
             // Computer attacks after a valid player attack
             const compAttack = players[1].play(players[0].playerGameboard)
             updateUI('player-one',compAttack.coords,compAttack.played.message)
-        }
 
-        
+        }
     
     }
 
@@ -67,11 +69,9 @@ function createUI(){
 
             const playerGameboard = player.playerGameboard.getBoard()
             
-
             console.log(playerGameboard)
             for(let row = 0; row < playerGameboard.length; row+=1){
                 for (let col = 0; col < playerGameboard[row].length; col+=1){
-
 
                         const cell = document.createElement('div')
                         cell.className = 'cell'
@@ -89,7 +89,6 @@ function createUI(){
 
             }
             
-            
             container.appendChild(board)
     
         }
@@ -97,7 +96,6 @@ function createUI(){
         players.forEach((player,index) =>{
             
             if(index === 0){
-
                 populateBoard(playerOneContainer, player)
             }else{
                 populateBoard(playerTwoContainer, player)
