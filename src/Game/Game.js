@@ -1,5 +1,6 @@
 import { createPlayer, createComputerPlayer } from '../Player/Player';
 import createUI from '../UI/UI';
+import Ship from '../Ship/Ship';
 
 function Game(){
 
@@ -11,9 +12,23 @@ function Game(){
         humanPlayer = createPlayer(name);
         computerPlayer = createComputerPlayer();
 
+        const submarine = new Ship(4)
+        
+        computerPlayer.playerGameboard.placeShip(submarine,[4,4],'vertical')
+
         const players = [humanPlayer,computerPlayer]
 
         createUI().gameView(players)
+
+    }
+
+    const gameLoop = () =>{
+
+    }
+
+    const gameOver = () =>{
+
+        
 
     }
 

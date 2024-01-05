@@ -38,7 +38,6 @@ function createUI(){
         const playerAttack =  players[0].play([clickedRow,clickedCol],players[1].playerGameboard)
 
 
-
         if (playerAttack.attacked){
 
             updateUI('player-two',[clickedRow,clickedCol], playerAttack.message)
@@ -121,9 +120,29 @@ function createUI(){
 
 
 
-    const gameOverView = () => ({
+    const gameOverView = (winner) => {
+
+        const overlay = document.querySelector('.overlay')
+        overlay.classList.toggle('hide')
+
+
+        const startNewGame = overlay.querySelector('#start-game')
+        const winnerElement = overlay.querySelector('#winner')
+
+        winnerElement.textContent = winner
+
+        startNewGame.addEventListener('click', (event)=>{
+            gameContainer.innerHTML = ''
+            
+            gameSetupView()
+        })
+
+
+        
+
+
     
-     })
+    }
 
     return{
         gameView,gameSetupView,gameOverView,

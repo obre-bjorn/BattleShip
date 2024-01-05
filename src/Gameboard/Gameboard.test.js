@@ -97,7 +97,7 @@ describe('GameBoard', () => {
      it('Should return true when receiving an attack on a cell that has not been attacked before', ()=>{
 
         const hasAttacked =  board.receiveAttack([2,2])
-        expect(hasAttacked).toBe(true)
+        expect(hasAttacked.attacked).toBe(true)
 
      })
      
@@ -107,7 +107,7 @@ describe('GameBoard', () => {
         const hasAttacked =  board.receiveAttack([2,2])
         const hasAttackedAgain = board.receiveAttack([2,2])
 
-        expect(hasAttackedAgain).toBe(false)
+        expect(hasAttackedAgain.attacked).toBe(false)
         
      })
 
