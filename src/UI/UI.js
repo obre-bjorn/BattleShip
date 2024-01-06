@@ -1,6 +1,6 @@
 
 
-function createUI(){
+function createUI(gameLoop){
 
     const gameContainer = document.getElementById('game-container')
     
@@ -26,12 +26,10 @@ function createUI(){
     const placeAttack = (cell,players) => {
         const clickedRow = parseInt(cell.dataset.row, 10);
         const clickedCol = parseInt(cell.dataset.col, 10);
-    
-        const currentPlayer = players.find((player) => player.turn )
         
         const validBoard = cell.parentNode.parentNode.getAttribute('id') === 'player-two'
 
-        if(currentPlayer !== players[0] || !validBoard ){
+        if(players[0].turn === false || !validBoard ){
             return
         }
     
@@ -43,9 +41,9 @@ function createUI(){
             updateUI('player-two',[clickedRow,clickedCol], playerAttack.message)
             
             // Computer attacks after a valid player attack
-            const compAttack = players[1].play(players[0].playerGameboard)
-            updateUI('player-one',compAttack.coords,compAttack.played.message)
-
+            // const compAttack = players[1].play(players[0].playerGameboard)
+            // updateUI('player-one',compAttack.coords,compAttack.played.message)
+            gameLoop()
         }
     
     }
@@ -102,14 +100,28 @@ function createUI(){
     
         })
 
+        // Game Info Setup
+        gameInfo.id = 'game-info'
+        const title = document.createElement('h1')
+        const message = document.createElement('h3')
+
+        title.textContent = 'BATTLESHIP'
+
+        message.id = 'message'
+
+        gameInfo.appendChild(title)
+        gameInfo.appendChild(message)
+
         gameContainer.appendChild(playerOneContainer)
         gameContainer.appendChild(gameInfo)
         gameContainer.appendChild(playerTwoContainer)
        
     }
 
-    
-        
+    const displayMessage = (mess) => {
+        const message = document.getElementById('message')
+        message.textContent = mess
+    }
         
 
 
@@ -123,7 +135,7 @@ function createUI(){
     const gameOverView = (winner) => {
 
         const overlay = document.querySelector('.overlay')
-        overlay.classList.toggle('hide')
+        overlay.classList.remove('hide')
 
 
         const startNewGame = overlay.querySelector('#start-game')
@@ -131,10 +143,11 @@ function createUI(){
 
         winnerElement.textContent = winner
 
-        startNewGame.addEventListener('click', (event)=>{
+        startNewGame.addEventListener('click', ()=>{
             gameContainer.innerHTML = ''
             
             gameSetupView()
+            overlay.classList.add('hide')
         })
 
 
@@ -145,7 +158,11 @@ function createUI(){
     }
 
     return{
-        gameView,gameSetupView,gameOverView,
+        gameView,
+        gameSetupView,
+        gameOverView,
+        displayMessage,
+        updateUI
     }
 }
 

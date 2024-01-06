@@ -14,7 +14,7 @@ function createPlayer(name){
 
     const playerGameboard = Gameboard()
 
-    const turn = true
+    const turn = false
 
 
     const play = (coordinates,opponentBoard) =>  opponentBoard.receiveAttack(coordinates)
