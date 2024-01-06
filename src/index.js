@@ -4,4 +4,4 @@ import Game from './Game/Game';
 
 
 
-Game().init('Bjorn')
+Game('Bjorn').init()

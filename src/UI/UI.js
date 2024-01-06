@@ -29,6 +29,7 @@ function createUI(gameLoop){
         
         const validBoard = cell.parentNode.parentNode.getAttribute('id') === 'player-two'
 
+        console.log(players[0].turn)
         if(players[0].turn === false || !validBoard ){
             return
         }
@@ -42,7 +43,7 @@ function createUI(gameLoop){
             
             // Computer attacks after a valid player attack
             // const compAttack = players[1].play(players[0].playerGameboard)
-            // updateUI('player-one',compAttack.coords,compAttack.played.message)
+             // updateUI('player-one',compAttack.coords,compAttack.played.message)
             gameLoop()
         }
     

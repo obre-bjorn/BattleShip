@@ -2,10 +2,11 @@ import { createPlayer, createComputerPlayer } from '../Player/Player';
 import createUI from '../UI/UI';
 import Ship from '../Ship/Ship';
 
-function Game(){
+function Game(name){
 
-    let humanPlayer;
-    let computerPlayer;
+    const humanPlayer = createPlayer(name);
+        
+    const computerPlayer = createComputerPlayer();;
     // eslint-disable-next-line no-use-before-define
     let ui;
     
@@ -37,13 +38,10 @@ function Game(){
         }
         
         // Player's turn
-        ui.displayMessage('Your turn! Click on the opponent\'s board to attack.');
         
-        // Wait for the player to make a move (handled by UI)
-        // UI will update the cell and switch turns
         
         // Computer's turn
-        humanPlayer.turn = false;
+        humanPlayer.turn = false
         
         ui.displayMessage('Computer\'s turn...');
         
@@ -53,25 +51,25 @@ function Game(){
             
             // Update UI for the computer's attack
             ui.updateUI('player-one', compAttack.coords, compAttack.played.message);
-        },1000)
+            humanPlayer.turn = true;
+            ui.displayMessage('Your turn! Click on the opponent\'s board to attack.');
+        },2000)
         
-        humanPlayer.turn = true;
-        // Continue the game loop
-        // setTimeout(() => gameLoop(), 1000); // Add delay for better visualization
+        
         
     }
     ui = createUI(gameLoop)
 
-     const init = (name) => {
+     const init = () => {
 
-        humanPlayer = createPlayer(name);
-        computerPlayer = createComputerPlayer();
+        
 
         const submarine = new Ship(4)
+        const submarine2 = new Ship(4)
         humanPlayer.turn = true
         
         computerPlayer.playerGameboard.placeShip(submarine,[4,4],'vertical')
-        humanPlayer.playerGameboard.placeShip(submarine,[4,4],'vertical')
+        humanPlayer.playerGameboard.placeShip(submarine2,[4,4],'vertical')
         const players = [humanPlayer,computerPlayer]
 
         ui.gameView(players)
