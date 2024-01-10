@@ -1,6 +1,26 @@
 import { createPlayer, createComputerPlayer } from '../Player/Player';
 import createUI from '../UI/UI';
 import Ship from '../Ship/Ship';
+import randomCoordinates from '../utils';
+
+
+function computerPlaceShip(ships,board){
+    
+    ships.forEach((ship) => {
+
+        const directions = ['vertical', 'horizontal']
+        const directionChoice = directions[Math.floor(Math.random() * 2)]
+
+        const coords = randomCoordinates();
+        let placedShip = false
+
+        while(!placedShip){
+            placedShip = board.placeShip(ship,coords,directionChoice)
+        }
+        
+    })
+
+}
 
 function Game(name){
 
@@ -42,7 +62,7 @@ function Game(name){
         
         // Computer's turn
         humanPlayer.turn = false
-        
+         
         ui.displayMessage('Computer\'s turn...');
         
         setTimeout(()=>{
@@ -62,13 +82,29 @@ function Game(name){
 
      const init = () => {
 
-        
+       const shipLengths =  [5,4,3,2,2]
+
+        const playerShips = []
+        const computerShips = []
+
+
+
+        shipLengths.forEach((length) =>{
+
+            playerShips.push(new Ship(length))
+            computerShips.push(new Ship (length))
+
+        })
+
 
         const submarine = new Ship(4)
         const submarine2 = new Ship(4)
         humanPlayer.turn = true
         
         computerPlayer.playerGameboard.placeShip(submarine,[4,4],'vertical')
+
+        computerPlaceShip(computerPlayer.playerGameboard,computerShips)
+
         humanPlayer.playerGameboard.placeShip(submarine2,[4,4],'vertical')
         const players = [humanPlayer,computerPlayer]
 
@@ -80,6 +116,8 @@ function Game(name){
     return {init}
 
 }
+
+
 
 
 

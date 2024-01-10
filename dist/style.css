@@ -11,7 +11,7 @@
 
 body{
     background-image: url(./assets/images/battleship.jpg);
-    backdrop-filter: ;
+    /* backdrop-filter: ; */
     font-size: 18px;
     font-family: 'VerminVibes';
     color: orangered;
@@ -62,18 +62,20 @@ body::before {
     padding-top:1rem;
     padding-bottom:1rem;
     cursor: grab;
-    gap:10rem
+    /* gap:10rem */
 
 
 
 }
+
 .ships-container>.ship{
+    width: 200px;
     display: flex;
     flex-direction: column;
     gap: .2rem;
 }
 .ships-container>#rotate-ship{
-    
+    margin-left: 10rem;
 }
 
 #game-setup.hide{

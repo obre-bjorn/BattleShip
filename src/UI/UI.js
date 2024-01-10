@@ -6,6 +6,9 @@ function createUI(gameLoop){
     
     const gameSetupView = () =>{
         
+
+
+        
     }
 
     const updateUI = (player,coordinates,message) =>{
