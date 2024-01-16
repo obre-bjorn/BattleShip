@@ -38,13 +38,21 @@ body::before {
     height: 100vh;
     z-index: 1;
 }
-
-#game-setup{
+#game-setup-container{
     position:absolute;
+    padding: 4rem;
+
+    /* To change */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top:0;
     width:100vw;
     height: 100vh;
     z-index: 2;
+}
+
+#game-setup{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,8 +61,9 @@ body::before {
 
 }
 .ships-container{
+    max-width: 800px;
     width: 80vw;
-    height: 25vh;
+    height: 250px;
     background-color: orangered;
     display: flex;
     align-items: center;
@@ -63,8 +72,6 @@ body::before {
     padding-bottom:1rem;
     cursor: grab;
     /* gap:10rem */
-
-
 
 }
 
@@ -76,13 +83,23 @@ body::before {
 }
 .ships-container>#rotate-ship{
     margin-left: 10rem;
+    background-color: #006994;
+    color: orangered;
+    font-size: 2rem;
+    border: #006994;
+    cursor: pointer;
 }
 
-#game-setup.hide{
+#game-setup-container.hide{
     display: none;
     
 
 }
+
+button{
+    padding: 10px 20px;
+}
+
 
 .player{
     display: flex;
@@ -116,16 +133,27 @@ body::before {
     
 
 }
+#game-setup > .board > .cell{
+    height:40px;
+    width: 40px; 
+}
 .cell:hover{
     background-color: white;
 }
 
 .cell.missed{
-    background-color: red;
+    background-color: lightblue;
 }
 .cell.hit{
-    background-color: gray;
+    background-color: red;
 }
+.cell.destroyed{
+    background-color: black;
+}
+.cell.show{
+    background-color: lightsalmon;
+}
+
 
 .overlay{
     display: flex;

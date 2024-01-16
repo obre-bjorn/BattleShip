@@ -7,7 +7,7 @@ const gameContainer = document.getElementById('game-setup')
 
 const board = document.createElement('div')
 const shipContainer = document.createElement('div')
-const shipsLengths = [4,4,3,2]
+const shipsLengths = [4,6,3,2]
 const ships = []
 
 
@@ -27,12 +27,15 @@ console.log(board)
 
                         cell.addEventListener('dragover', (event) => {
                             event.preventDefault()
-                            const rowSelected= event.target.dataset.row
-                            const colSelected = event.target.dataset.col
                             
-                            console.log(rowSelected,colSelected)
                         
                         });
+                        cell.addEventListener('drop',(event) =>{
+                            const rowSelected= event.target.dataset.row
+                            const colSelected = event.target.dataset.col
+                            const {side}  = document.querySelector('#rotate-ship').dataset
+                            console.log(rowSelected,colSelected,side)
+                        })
                         
 
                         board.appendChild(cell);
@@ -47,14 +50,7 @@ for(const shipLength of shipsLengths){
     ship.classList.add('ship')
     ship.draggable = 'true' 
     ship.dataset.length = `${shipLength}`
-    ship.addEventListener('drop',(event)=>{
-                    console.log('dropped')
-                            while(ships){
-                                ships.shift()
-                                shipContainer.appendChild(ships[0])
-                            }
-                        })
-
+    
     for(let shipPart = 0; shipPart < shipLength; shipPart+=1){
 
         const part = document.createElement('div')
@@ -64,6 +60,18 @@ for(const shipLength of shipsLengths){
     }
 
     ships.push(ship)
+
+    ship.addEventListener('dragend',(event)=>{
+
+        event.preventDefault()
+        console.log('dropped')
+                            
+        ships.shift()
+                                // console.log(ships)
+        shipContainer.appendChild(ships[0])
+        
+    })
+
 
 }
 
