@@ -60,7 +60,7 @@ function createUI(gameLoop,players){
         
         // const playerContainers = [playerOneContainer,playerTwoContainer]
         
-        function populateBoard(container,player){
+        function populateBoard(container,player,show){
 
             const board = document.createElement('div')
             board.className = 'board'
@@ -76,7 +76,7 @@ function createUI(gameLoop,players){
                         cell.dataset.row = row
                         cell.dataset.col = col
 
-                        if(player.playerGameboard.checkSpaceOccupied([row,col])){
+                        if(player.playerGameboard.checkSpaceOccupied([row,col]) && show){
                             cell.classList.add('show')
                         }
 
@@ -98,9 +98,9 @@ function createUI(gameLoop,players){
         activePlayers.forEach((player,index) =>{
             
             if(index === 0){
-                populateBoard(playerOneContainer, player)
+                populateBoard(playerOneContainer, player, true)
             }else{
-                populateBoard(playerTwoContainer, player)
+                populateBoard(playerTwoContainer, player,false)
             }
     
         })

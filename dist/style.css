@@ -144,16 +144,16 @@ button{
 .cell.missed{
     background-color: lightblue;
 }
-.cell.hit{
-    background-color: red;
-}
 .cell.destroyed{
     background-color: black;
 }
 .cell.show{
     background-color: lightsalmon;
 }
-
+.cell.hit{
+    background-color: red;
+}
+    
 
 .overlay{
     display: flex;
