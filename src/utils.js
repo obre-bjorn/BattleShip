@@ -12,30 +12,31 @@ export default  function randomCoordinates(){
 export function showShip(coordinates,shipLength,side,condition){
     let[x,y] = coordinates
     
-    for(let shipPart = 0; shipPart < shipLength.length; shipPart+=1){
-        const cellSelected = document.querySelector(`data-row =${x} data-col=${y}`)
+    for(let shipPart = 0; shipPart < shipLength; shipPart+=1){
+        const cellSelected = document.querySelector(`[data-row ="${x}"][data-col="${y}"]`)
         
+        console.log(x,y)
 
         if (condition === 'show'){
             
             cellSelected.classList.add('show') 
             if( side === 'vertical'){
                 
-                y+=1
+                x+=1
     
             }else{
-                x+=1
+                y+=1
     
             }   
         }else{
-            
+
             cellSelected.classList.add('destroyed') 
             if( side === 'vertical'){
                 
-                y+=1
+                x+=1
     
             }else{
-                x+=1
+                y+=1
     
             }  
         }

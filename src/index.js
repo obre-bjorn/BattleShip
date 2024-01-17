@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 // import { createPlayer,createComputerPlayer } from './Player/Player';
-// import Game from './Game/Game';
+// import Game from './Game/Game'
+import { showShip } from './utils'
 
 const gameContainer = document.getElementById('game-setup')
 
@@ -31,10 +32,13 @@ console.log(board)
                         
                         });
                         cell.addEventListener('drop',(event) =>{
-                            const rowSelected= event.target.dataset.row
-                            const colSelected = event.target.dataset.col
+                            const rowSelected= parseInt(event.target.dataset.row, 10)
+                            const colSelected = parseInt(event.target.dataset.col,10)
                             const {side}  = document.querySelector('#rotate-ship').dataset
-                            console.log(rowSelected,colSelected,side)
+                            const shipLength = document.querySelector('.ship').dataset.length
+                            console.log(rowSelected,colSelected,side,shipLength)
+                            showShip([rowSelected,colSelected],shipLength,side,'destroyed')
+                            // Reset the rotate button value whenever a ship has been dropped to 'vertical'
                         })
                         
 
@@ -67,8 +71,8 @@ for(const shipLength of shipsLengths){
         console.log('dropped')
                             
         ships.shift()
-                                // console.log(ships)
-        shipContainer.appendChild(ships[0])
+        shipContainer.removeChild(document.querySelector('.ship'))     // console.log(ships)
+        shipContainer.insertBefore(ships[0],shipContainer.firstChild)
         
     })
 
