@@ -7,15 +7,17 @@ import randomCoordinates from '../utils';
 function computerPlaceShip(ships,board){
     
     ships.forEach((ship) => {
+        console.log('placed Ship')
 
         const directions = ['vertical', 'horizontal']
         const directionChoice = directions[Math.floor(Math.random() * 2)]
 
-        const coords = randomCoordinates();
+        let coords = randomCoordinates();
         let placedShip = false
 
         while(!placedShip){
             placedShip = board.placeShip(ship,coords,directionChoice)
+            coords = randomCoordinates()
         }
         
     })
@@ -28,7 +30,10 @@ function Game(name){
         
     const computerPlayer = createComputerPlayer();;
     // eslint-disable-next-line no-use-before-define
+    const players = [humanPlayer,computerPlayer]
+
     let ui;
+    
     
 
     const checkGameOver = () =>{
@@ -78,11 +83,11 @@ function Game(name){
         
         
     }
-    ui = createUI(gameLoop)
+    ui = createUI(gameLoop,players)
 
      const init = () => {
 
-       const shipLengths =  [5,4,3,2,2]
+        const shipLengths =  [5,4,3,2,2]
 
         const playerShips = []
         const computerShips = []
@@ -97,18 +102,18 @@ function Game(name){
         })
 
 
-        const submarine = new Ship(4)
-        const submarine2 = new Ship(4)
+        // const submarine = new Ship(4)
+        // const submarine2 = new Ship(4)
         humanPlayer.turn = true
         
-        computerPlayer.playerGameboard.placeShip(submarine,[4,4],'vertical')
+        // computerPlayer.playerGameboard.placeShip(submarine,[4,4],'vertical')
 
-        computerPlaceShip(computerPlayer.playerGameboard,computerShips)
+        // computerPlaceShip(computerPlayer.playerGameboard,computerShips)
 
-        humanPlayer.playerGameboard.placeShip(submarine2,[4,4],'vertical')
-        const players = [humanPlayer,computerPlayer]
-
-        ui.gameView(players)
+        // humanPlayer.playerGameboard.placeShip(submarine2,[   4,4],'vertical')
+        
+        computerPlaceShip(computerShips,computerPlayer.playerGameboard)
+        ui.gameSetupView(playerShips)
 
     }
 
@@ -116,8 +121,6 @@ function Game(name){
     return {init}
 
 }
-
-
 
 
 

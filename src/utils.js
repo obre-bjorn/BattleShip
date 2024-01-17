@@ -4,7 +4,15 @@ export default  function randomCoordinates(){
     const x = Math.floor(Math.random() * 10);
     const y = Math.floor(Math.random() * 10);
 
-    return [x,y]
+    return [y,x]
+}
+
+
+export function clearContainer(parentElement){
+    
+   // eslint-disable-next-line no-param-reassign
+   parentElement.innerHTML = ''
+
 }
 
 // Show ship in the UI if It is damaged or just showing its location

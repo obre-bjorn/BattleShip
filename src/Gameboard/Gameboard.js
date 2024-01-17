@@ -78,10 +78,8 @@
                         for(let shipPartX = x; shipPartX <=  endX; shipPartX += 1){
 
                             const newCoordinates = [shipPartY,shipPartX]
-                            const occupied = checkSpaceOccupied(newCoordinates)
-                            const validSpace = checkValidSpace(newCoordinates) 
-
-                            if (!validSpace || occupied)  {
+                        
+                            if (!checkValidSpace(newCoordinates) || checkSpaceOccupied(newCoordinates))  {
                                 return false                            
                             }                                   
                         }
@@ -131,6 +129,7 @@
 
 
             return {
+                checkSpaceOccupied,
                 getBoard,
                 placeShip,
                 receiveAttack,
