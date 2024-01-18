@@ -277,10 +277,12 @@ function createUI(gameLoop,players){
         winnerElement.textContent = winner
 
         startNewGame.addEventListener('click', ()=>{
-            gameContainer.innerHTML = ''
+            console.log('game over')
+            location.reload(true)
+            // gameContainer.innerHTML = ''
             
-            gameSetupView()
-            overlay.classList.add('hide')
+            // gameSetupView()
+             overlay.classList.add('hide')
         })
 
         
