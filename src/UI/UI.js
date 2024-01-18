@@ -181,13 +181,19 @@ function createUI(gameLoop,players){
                         ships.shift()
                         shipContainer.removeChild(document.querySelector('.ship'))     // console.log(ships)
                         console.log(ships[0])
+                        
+                        document.getElementById('rotate-ship').dataset.side = 'vertical'
+
                             if(ships[0] === undefined){
+
                                 console.log('ships endend')
                                 clearContainer(gameSetupContainer)
                                 mainSetupContainer.classList.add('hide')
                                 gameView(players)
                                 return ''
+                                
                             }
+
                             shipContainer.insertBefore(ships[0],shipContainer.firstChild)
 
                     }else{
